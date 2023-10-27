@@ -1,0 +1,13 @@
+openai==0.27.8
+langchain==0.0.240
+requests==2.29.0
+fastapi==0.82.0
+sse-starlette==1.3.3
+uvicorn==0.18.3
+python-dotenv==1.0.0
+pydantic==1.10.7
+path==16.6.0
+typing-extensions==4.5.0
+pymongo
+googletrans==4.0.0-rc1
+dnspython==2.3.0
