@@ -2,6 +2,7 @@ import pymongo
 
 BE_DB="hackathongenai"
 MESSAGE_COLLECTION="Message"
+COMPANY_COLLECTION="Company"
 
 def singleton(class_):
     instances = {}
@@ -21,3 +22,4 @@ class Model:
                                     port = port)
         be_db = client[BE_DB]
         self.message_col = be_db[MESSAGE_COLLECTION]
+        self.company_col = be_db[COMPANY_COLLECTION]

@@ -1,12 +1,10 @@
 from config.load_env import ENV
-from .db import Model
-from generation.avatar_generation import AvatarGeneration
+from db import Model
 
 env = ENV()
 MONGODB_HOST = env.MONGODB_HOST
 MONGODB_PORT = env.MONGODB_PORT
 db = Model(MONGODB_HOST, MONGODB_PORT)
-image_generator = AvatarGeneration()
 
 class Document:
     def get_info(self, user_id):
@@ -24,11 +22,9 @@ class Document:
 
     def insert_user(self, user_id, user_info):
         try:
-            image_bytes = image_generator.generate(user_info)
             record = {
                 "user_id": user_id,
                 "user_info": user_info,
-                "avatar": image_bytes,
                 "conversation": []
             }
             db.message_col.insert_one(record)
@@ -65,4 +61,4 @@ if __name__ == "__main__":
             "content": ""
         }
     ]
-    #_ = document.insert_user("", user_info)
+    _ = document.insert_user("", user_info)
