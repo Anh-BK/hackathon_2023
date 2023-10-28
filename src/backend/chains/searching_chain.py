@@ -30,13 +30,18 @@ class OnlineSearch(QueryExtractorLangchain):
         search_results = text_results["content"].replace('"', '').split("\n")
         queries = list(map(split_bullet_point, search_results))
 
+        # composer_kwargs = {
+        #     "question": """
+        #     Question: {question}
+        #     Context: {context}
+        #     Requirements:{task_requirement}
+        #     Answer:
+        #     """.format(**kwargs),
+        #     "sources": ""
+        # }
         composer_kwargs = {
-            "question": """
-            Question: {question}
-            Context: {context}
-            Requirements:{task_requirement}
-            Answer:
-            """.format(**kwargs),
+            # "question": '{question}\n{context}\nrequirements:{task_requirement}'.format(**kwargs),
+            "question": "{task_requirement}\nContext:```{context}```\nHistory:<{history}>\nQuestion:\"\"\"{question}\"\"\"\nAnswer:".format(**kwargs), 
             "sources": ""
         }
 
