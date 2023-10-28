@@ -5,27 +5,21 @@ from chains.searching_chain import OnlineSearch
 from constant.prompt import PROMPT_TYPES
 from schema.chat import BaseRequest
 from model.document import Document
+from model.message import Message
 
 router = APIRouter()
 searching_chat = OnlineSearch()
 user_document = Document()
+message_dao = Message()
 
 @router.post("/answering")
 async def _answering(body: BaseRequest):
     user_request = body.dict()
     question = user_request["human_message"]
-    user_id = user_request["user_id"]
     task = user_request["task"]
+    history = user_request["history"]
     company_name = user_request["company_name"]
-    history = user_document.get_history(user_id)
-    current_conversation = [
-        {
-            "role": "user",
-            "content": question
-        }
-    ]
     assitant_output = searching_chat.query(question=question, history=history, task=task)
-    current_conversation.append(assitant_output)
-    history = history + current_conversation
-    _ = user_document.update_history(user_id, history[-9:]) #last 3 converstions
+    _ = message_dao.insert_message("user", question, company_name, company_name)
+    _ = message_dao.insert_message("assistant", assitant_output, company_name)
     return assitant_output

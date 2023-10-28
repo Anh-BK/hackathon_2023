@@ -1,5 +1,5 @@
 from config.load_env import ENV
-from .db import Model
+from db import Model
 
 env = ENV()
 MONGODB_HOST = env.MONGODB_HOST
@@ -25,7 +25,6 @@ class Document:
             record = {
                 "user_id": user_id,
                 "user_info": user_info,
-                "avatar": image_bytes,
                 "conversation": []
             }
             db.message_col.insert_one(record)
@@ -62,4 +61,4 @@ if __name__ == "__main__":
             "content": ""
         }
     ]
-    #_ = document.insert_user("", user_info)
+    _ = document.insert_user("", user_info)
