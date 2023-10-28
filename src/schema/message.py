@@ -6,3 +6,7 @@ from pydantic import BaseModel
 class Message(BaseModel):
     content: str
     role: str
+
+class UpdatingRequest(BaseModel):
+    message_id: str
+    company_id: str

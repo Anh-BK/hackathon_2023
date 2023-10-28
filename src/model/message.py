@@ -30,24 +30,35 @@ class Message:
         except Exception as e:
             return False, e
     
-    def get_history(self, user_id):
-        user_data = db.message_col.find_one({"user_id": user_id})
-        conversation = user_data["conversation"]
-        return conversation
+    def get_messages(self, company_id, is_useful):
+
+        if is_useful != None:
+            messages = db.message_col.find({
+                "company_id": company_id,
+                "is_useful": is_useful}
+                )
+        else:
+            messages = db.message_col.find({"company_id": company_id})
+        records = []
+        for message in messages:
+            message["_id"] = str(message["_id"])
+            records.append(message)
+        return records
   
-    def update_message(self, id, is_useful):
-        filter = {'_id': id}
+    def update_status(self, message_id, is_useful):
+        filter = {'_id': message_id}
         new_conversation = { "$set": { 'is_useful':  is_useful} }
         db.message_col.update_one(filter, new_conversation)
         return True
     
-    def insert_message(self, role, message, company_name):
+    def insert_message(self, role, message, company_name, **kwargs):
         try:
             record = {
                 "message": message,
                 "role": role,
                 "company_id":company_name,
                 "is_useful": False,
+                **kwargs
             }
             record['created_at'] = datetime.now()
             record['updated_at'] = record['created_at']
@@ -55,3 +66,9 @@ class Message:
             return True, ""
         except Exception as e:
             return False, e
+
+if __name__ == "__main__":
+    message_dao = Message()
+    # _ = message_dao.insert_message("user", message="hello world!", company_name="FPT")
+    records = message_dao.get_messages("FPT")
+    print(records)

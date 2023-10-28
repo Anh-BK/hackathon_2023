@@ -1,5 +1,5 @@
 from config.load_env import ENV
-from db import Model
+from .db import Model
 
 env = ENV()
 MONGODB_HOST = env.MONGODB_HOST
