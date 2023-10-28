@@ -14,14 +14,14 @@ services:
     volumes:
       - ./mongodata:/data/db
 
-  chatbot_be:
-    image: 'chatbot_be:latest'
-    ports:
-      - '8000:8000'
-    environment:
-      MONGODB_HOST: mongodb
-    networks:
-      - genai
+  # chatbot_be:
+  #   image: 'chatbot_be:latest'
+  #   ports:
+  #     - '8000:8000'
+  #   environment:
+  #     MONGODB_HOST: mongodb
+  #   networks:
+  #     - genai
     
 
 networks:

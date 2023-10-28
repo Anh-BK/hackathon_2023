@@ -51,7 +51,7 @@ class OnlineSearch(QueryExtractorLangchain):
         citation = "**Citation:**\n" + reference
         print(composer_kwargs)
         ai_message = self.composer.predict(**composer_kwargs, callbacks=kwargs.get("callbacks"))
-        return True, ai_message, citation
+        return ai_message, citation
 
 if __name__ == '__main__':
     chain = OnlineSearch()

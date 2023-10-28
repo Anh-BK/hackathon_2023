@@ -1,13 +1,12 @@
 from pydantic import BaseModel
-from typing import Union, List, Optional
-from message import Message
+from typing import Union, List, Optional, Literal
+from .message import Message
 
 class BaseRequest(BaseModel):
-    user_id: str
     human_message: str
     company_name: str
-    history: List[Message]
-    task: Optional[str]
+    history: Optional[List[Message]]
+    task: Literal['extraction', 'interpretation', 'summarization']
 
 class BaseResponse(BaseModel):
     AI_message: str
