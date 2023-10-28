@@ -5,4 +5,4 @@ from .user_profile import router as profile_router
 
 api_v1_router = APIRouter()
 api_v1_router.include_router(answering_router, prefix="/answering",tags=["Answering"])
-api_v1_router.include_router(profile_router, prefix="/profile",tags=["Profile"])
+api_v1_router.include_router(company_router, prefix="/company",tags=["Company"])

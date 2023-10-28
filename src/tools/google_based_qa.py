@@ -37,9 +37,9 @@ google_tool = CustomGoogleSearchTool(
     name='Google Search Tool',
     description="Use this tool when user asks question that needs to look up contexts from the Internet ",
     api_wrapper=GoogleSearchAPIWrapper(
-        google_api_key="AIzaSyBcwB4YIqjDcYr5XnPt5IrktqbH4Mb_1hE",
+        google_api_key=env.GOOGLE_API_KEY,
         google_cse_id="e61c62a86e2b848fd",
-        search_engine='Search Engine Basic',
+        search_engine='Search Engine Basic'
     )
 )
 

@@ -52,6 +52,4 @@ class QueryExtractorLangchain(QueryExtractorChain):
 
         response = self.inference(conversation, streaming, callbacks_streaming)
         ai_message = Message(role='assistant', content=response.generations[0][0].text).dict()
-        print(response.generations[0][0].text)
-
         return ai_message
