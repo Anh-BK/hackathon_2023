@@ -20,8 +20,8 @@ class OnlineSearch(QueryExtractorLangchain):
 
     def run(self, history: List[Message] = [], **kwargs):
         kwargs["context"] = kwargs.get("context", "")
-        task_name = kwargs.get("task", "")
-        kwargs["task_requirement"] = PREDEFINED_ACTIONS.get(task_name,"")
+        task_name = kwargs.get("task", "standard")
+        kwargs["task_requirement"] = PREDEFINED_ACTIONS.get[task_name]
 
         param_query_extractor = {key: value for key, value in kwargs.items() if key not in ['streaming', 'callbacks']}
         text_results = super().run(HUMAN_TEMPLATE, history, streaming=False, **param_query_extractor)
@@ -48,7 +48,7 @@ class OnlineSearch(QueryExtractorLangchain):
             reference += f"[{idx + 1}]" + " Source: " + source[1] + "\n"
             format_source += "Content: " + source[0] + "\n" + f"[{idx + 1}]" + " Source: " + source[1] + "\n\n"
         composer_kwargs["sources"] = format_source
-        citation = "**Citation:**\n" + reference
+        citation = "**Citations:**\n" + reference
         print(composer_kwargs)
         ai_message = self.composer.predict(**composer_kwargs, callbacks=kwargs.get("callbacks"))
         return ai_message, citation

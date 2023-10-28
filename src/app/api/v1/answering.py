@@ -16,7 +16,7 @@ message_dao = Message()
 async def _answering(body: BaseRequest):
     user_request = body.dict()
     question = user_request["human_message"]
-    task = user_request["task"]
+    task = user_request.get("task")
     history = user_request.get("history", None)
     company_name = user_request["company_name"]
     assitant_output, citations = searching_chat.query(question=question, history=history, task=task)
