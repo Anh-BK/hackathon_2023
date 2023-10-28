@@ -39,7 +39,6 @@ class OnlineSearch(QueryExtractorLangchain):
             """.format(**kwargs),
             "sources": ""
         }
-        print(composer_kwargs)
 
         tool = google_tool
         tool.num_results = 1
@@ -57,6 +56,7 @@ class OnlineSearch(QueryExtractorLangchain):
             format_source += "Content: " + source[0] + "\n" + f"[{idx + 1}]" + " Source: " + source[1] + "\n\n"
         composer_kwargs["sources"] = format_source
         citation = "**Citations:**\n" + reference
+        print(composer_kwargs)
         ai_message = self.composer.predict(**composer_kwargs, callbacks=kwargs.get("callbacks"))
         return ai_message, citation
 

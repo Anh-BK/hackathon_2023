@@ -21,11 +21,11 @@ class ComparisionChain(SimpleChain):
         super().__init__()
 
     def run(self, prompt_type, **kwargs) -> dict:
-        conversation = self.reset_conversation("comparision", prompt_type, **kwargs)
-        context1, context2 = kwargs.get("contexts")
+        conversation = self.reset_conversation("comparision", **kwargs)
+        context_1, context_2 = kwargs.get("contexts")
         user_question = {
             "role": "user",
-            "content": prompt_type["comparision"]["user"].format(context1, context2)
+            "content": prompt_type["comparision"]["user"].format(context_1=context_1, context_2=context_2)
         }
 
         conversation.append(user_question)

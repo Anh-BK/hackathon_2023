@@ -9,6 +9,6 @@ COMPARISION_SYSTEM_TEMPLATE = (
 COMPARISION_USER_TEMPLATE = (
     "Contexts:\n"
     "- Context 1: {context_1}\n"
-    "- Context 2: {context_3}\n"
+    "- Context 2: {context_2}\n"
     "Helpful Answer: "
 )

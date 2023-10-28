@@ -13,7 +13,7 @@ PROMPT_TYPES = {
         "system": SYSTEM_TEMPLATE,
         "user": HUMAN_TEMPLATE,
     },
-    "comparition": {
+    "comparision": {
         "system":COMPARISION_SYSTEM_TEMPLATE,
         "user":COMPARISION_USER_TEMPLATE,
     }

@@ -16,5 +16,6 @@ async def _comparing(body: ComparisionRequest):
     first_context = user_request["context_1"]
     second_context = user_request["context_2"]
     contexts = [first_context, second_context]
-    assitant_output = comparision_chain.query(contexts=contexts)
+    assitant_output = comparision_chain.query(PROMPT_TYPES, contexts=contexts)
+    print(assitant_output)
     return assitant_output
