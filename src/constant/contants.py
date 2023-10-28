@@ -1,2 +1,0 @@
-ASSISTANT = 'assistant'
-USER = 'user'

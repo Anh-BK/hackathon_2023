@@ -1,1 +1,0 @@
-from .contants import ASSISTANT, USER
