@@ -9,4 +9,4 @@ class Message(BaseModel):
 
 class UpdatingRequest(BaseModel):
     message_id: str
-    company_id: str
+    is_useful: bool

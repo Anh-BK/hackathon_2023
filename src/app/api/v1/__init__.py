@@ -7,5 +7,5 @@ from .comparision import router as comparision_router
 api_v1_router = APIRouter()
 api_v1_router.include_router(answering_router, prefix="/answering",tags=["Answering"])
 api_v1_router.include_router(conversation_router, prefix="/conversation",tags=["Conversasion"])
-api_v1_router.include_router(conversation_router, prefix="/comparision",tags=["Comparision"])
+api_v1_router.include_router(comparision_router, prefix="/comparision",tags=["Comparision"])
 
