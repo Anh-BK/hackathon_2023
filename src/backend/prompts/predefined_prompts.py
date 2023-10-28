@@ -15,11 +15,6 @@ Step 3: Summary the relevant information into 2-3 sentences. If the text does no
 simply write \"Text not mentioned\". 
 """
 
-# History: <{history}>
-# Context: ```{context}```
-# Question: \"\"\"{question}\"\"\"
-# """
-
 REWRITE = """
 Your task is to help reader in a conversation by re-writing the question\ 
 to make it more clear. \n
@@ -42,23 +37,12 @@ Question: Summary the company's business aspect in 2010.
 Re-write question: Sumamry the business aspect of FPT in 2010. 
 
 """
-# History: <{history}> 
-# Question: \"\"\"{question}\"\"\"
-
-# Re-write question: 
-# """
-
 
 EXTRACTION = """
 - Extraction task: Your task is to answer the question of human delimited by triple quotes \ 
 based on the context delimited by the triple backsticks and the history chat delimited by <>. \ 
 If the information is not mentioned in the context, just simply write \"The information is not mentioned.\" \ 
 """ 
-# Context: ```{context} {history}``` \n 
-# Question: \"\"\"{question}\"\"\" \n 
-# Answer: 
-# """
-
 
 INTERPRETATION = """
 - New insight task: Your task is to provide a new perspective or new insights to reader about some documents.\ 
@@ -79,8 +63,3 @@ Question: \"\"\"What does the change of number of employees say about?\"\"\"
 Answer: The number of employees of the company was significant, reaching 400 members in 2020. In 2016, there are only 10 female employees working in the company.\ 
 This number increase rapidly from 2016 to 2020, reaching 150 female out of 400 employees in total. \n
 """
-# Context: ```{context} {history}```
-# Question: \"\"\"{question}\"\"\"
-
-# Answer: 
-# """
