@@ -1,6 +1,6 @@
 from prompts.direct_qa import SYSTEM_TEMPLATE, HUMAN_TEMPLATE
 from prompts.comparision_prompts import COMPARISION_SYSTEM_TEMPLATE, COMPARISION_USER_TEMPLATE
-from prompts.predefined_prompts import SUMMARIZATION, INTEPRETATION, EXTRACTION, STANDARD
+from prompts.predefined_prompts import SUMMARIZATION, INTERPRETATION, EXTRACTION, STANDARD
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
@@ -26,7 +26,7 @@ PROMPT_TYPES = {
 
 PREDEFINED_ACTIONS = {
     "extraction": EXTRACTION,
-    "interpretation": INTEPRETATION,
+    "interpretation": INTERPRETATION,
     "summarization": SUMMARIZATION,
     "standard": STANDARD
 }

@@ -20,8 +20,10 @@ class OnlineSearch(QueryExtractorLangchain):
 
     def run(self, history: List[Message] = [], **kwargs):
         kwargs["context"] = kwargs.get("context", "")
-        task_name = kwargs.get("task", "standard")
-        kwargs["task_requirement"] = PREDEFINED_ACTIONS.get[task_name]
+        task_name = kwargs.get("task")
+        if task_name == None:
+            task_name = "standard"
+        kwargs["task_requirement"] = PREDEFINED_ACTIONS[task_name]
 
         param_query_extractor = {key: value for key, value in kwargs.items() if key not in ['streaming', 'callbacks']}
         text_results = super().run(HUMAN_TEMPLATE, history, streaming=False, **param_query_extractor)
@@ -32,6 +34,7 @@ class OnlineSearch(QueryExtractorLangchain):
             "question": '{question}\n{context}\nrequirements:{task_requirement}'.format(**kwargs),
             "sources": ""
         }
+        print(composer_kwargs)
 
         tool = google_tool
         tool.num_results = 1
