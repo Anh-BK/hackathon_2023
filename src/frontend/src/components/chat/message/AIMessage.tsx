@@ -36,9 +36,18 @@ export function AIMessage({ message, getListMessage, getListUsefulMessage }) {
               {message.message}
             </Markdown>
             <br />
-            <Markdown className="text-[14px] p-0" remarkPlugins={[remarkGfm]}>
-              {message.citations}
-            </Markdown>
+            {message.citations.split("\n").map((m) => (
+              <>
+                <Markdown
+                  className="text-[14px] p-0 underline italic"
+                  remarkPlugins={[remarkGfm]}
+                >
+                  {m}
+                </Markdown>
+                <br />
+              </>
+            ))}
+
             {/* <p className="text-[14px] p-0">{message}</p> */}
           </CardBody>
         </Card>
