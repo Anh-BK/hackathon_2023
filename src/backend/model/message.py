@@ -63,8 +63,8 @@ class Message:
             }
             record['created_at'] = datetime.now()
             record['updated_at'] = record['created_at']
-            db.message_col.insert_one(record)
-            return True, ""
+            db_result = db.message_col.insert_one(record)
+            return True, db_result
         except Exception as e:
             return False, e
 

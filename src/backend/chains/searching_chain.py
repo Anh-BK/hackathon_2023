@@ -40,8 +40,9 @@ class OnlineSearch(QueryExtractorLangchain):
         #     "sources": ""
         # }
         composer_kwargs = {
-            # "question": '{question}\n{context}\nrequirements:{task_requirement}'.format(**kwargs),
-            "question": "{task_requirement}\nContext:```{context}```\nHistory:<{history}>\nQuestion:\"\"\"{question}\"\"\"\nAnswer:".format(**kwargs), 
+            "question": "{question}".format(**kwargs),
+            "company_name": kwargs.get("company_name",""),
+            "task_requirement": "{task_requirement}".format(**kwargs),
             "sources": ""
         }
 
@@ -50,7 +51,7 @@ class OnlineSearch(QueryExtractorLangchain):
         if self.detailed_search:
             tool = retrieval_tool
         for query in queries[:self.num_queries]:
-            searched_results = tool.run(query, num_results=max(6//len(queries), 1))
+            searched_results = tool.run(query, num_results=3)
             composer_kwargs["sources"] += searched_results
 
         pattern = r"Content: (.*?)\nSource: (.*?)\n\n"

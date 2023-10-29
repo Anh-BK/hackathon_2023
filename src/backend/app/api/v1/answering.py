@@ -19,10 +19,12 @@ async def _answering(body: BaseRequest):
     task = user_request.get("task")
     history = user_request.get("history", None)
     company_name = user_request["company_name"]
-    assitant_output, citations = searching_chat.query(question=question, history=history, task=task)
-    _ = message_dao.insert_message("user", question, company_name)
-    _ = message_dao.insert_message("assistant", assitant_output, company_name, citations=citations)
+    assitant_output, citations = searching_chat.query(question=question, history=history, task=task, company_name=company_name)
+    _, _question_id = message_dao.insert_message("user", question, company_name)
+    _, _assistant_id = message_dao.insert_message("assistant", assitant_output, company_name, citations=citations)
     return {
         "answer": assitant_output,
-        "citation": citations
+        "citation": citations,
+        "question_id": str(_question_id.inserted_id),
+        "message_id": str(_assistant_id.inserted_id)
     }

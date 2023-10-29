@@ -19,6 +19,7 @@ You should follow the Instructions below and think step by step to make sure we 
 ###Begin Instruction###
 - The queries should best match the specific information prompted in the question
 - The queries are used in conjunction to search, so they must be semantically different
+- The queries should be only related to the company named {company_name}
 - Arranging the search queries in order that is most likely to lead to successful search results
 - The queries should be arranged in a Markdown list of bullet points
 - Make sure that your answer only has Google queries found and does not include any apologies or explanations.
