@@ -58,6 +58,8 @@ class OnlineSearch(QueryExtractorLangchain):
         reference = ""
         format_source = ""
         for (idx, source) in enumerate(re.findall(pattern, composer_kwargs["sources"], re.DOTALL)):
+            if idx > 6:
+                break
             reference += f"[{idx + 1}]" + " Source: " + source[1] + "\n"
             format_source += "Content: " + source[0] + "\n" + f"[{idx + 1}]" + " Source: " + source[1] + "\n\n"
         composer_kwargs["sources"] = format_source
