@@ -1,11 +1,9 @@
 import { CheckboxGroup } from "@nextui-org/react";
-import { CustomCheckbox } from "./CheckBox";
+import { CustomCheckbox } from "./Checkbox";
 import React from "react";
 import { companies } from "../../constants/company";
 
-export function CheckboxGroupCustom() {
-  const [groupSelected, setGroupSelected] = React.useState([]);
-
+export function CheckboxGroupCustom({ groupSelected, setGroupSelected }) {
   return (
     <div className="flex flex-col gap-1 w-full">
       <CheckboxGroup

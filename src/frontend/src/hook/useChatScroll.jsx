@@ -6,6 +6,6 @@ export function useChatScroll(dep) {
     if (ref.current) {
       ref.current.scrollTop = ref.current.scrollHeight;
     }
-  }, [dep]);
+  }, [dep.length]);
   return ref;
 }

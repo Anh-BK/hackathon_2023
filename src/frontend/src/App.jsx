@@ -45,18 +45,15 @@ export default function App() {
       method: "POST",
       data: {
         company_id: company,
-        // is_useful: true,
+        is_useful: true,
       },
     });
 
-    const covertUsefulTable = messages
-      .filter((_, index) => index % 2 == 1)
-      .map((m, index) => ({
-        id: m._id,
-        answer: m.message,
-        question: messages[index].message,
-        citations: m.citations,
-      }));
+    const covertUsefulTable = messages.map((m, index) => ({
+      id: m._id,
+      answer: m.message,
+      citations: m.citations,
+    }));
     setUsefulTable(covertUsefulTable);
   };
 
@@ -77,7 +74,12 @@ export default function App() {
         </div>
         <div className="mt-10 w-full flex justify-between h-[75%]">
           <div className="w-[80%]">
-            <ListMessage listMessage={listMessage} usefulTable={usefulTable} />
+            <ListMessage
+              listMessage={listMessage}
+              getListMessage={getListMessage}
+              usefulTable={usefulTable}
+              getListUsefulMessage={getListUsefulMessage}
+            />
             <BoxChat
               preAction={preAction}
               company={company}
@@ -99,6 +101,7 @@ export default function App() {
           </div>
         </div>
         <FloatingButton
+          getListUsefulMessage={getListUsefulMessage}
           usefulTable={usefulTable}
           setUsefulTable={setUsefulTable}
         />

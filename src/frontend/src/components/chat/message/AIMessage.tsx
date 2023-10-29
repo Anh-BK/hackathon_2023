@@ -1,21 +1,24 @@
 import { Avatar, Button, Card, CardBody, Textarea } from "@nextui-org/react";
+import React, { useState } from "react";
 
+import { AiFillDelete } from "react-icons/ai";
 import Markdown from "react-markdown";
 import { MdAddToPhotos } from "react-icons/md";
-import React from "react";
 import axiosClient from "../../../config/axios";
 import remarkGfm from "remark-gfm";
 
-export function AIMessage({ message }) {
+export function AIMessage({ message, getListMessage, getListUsefulMessage }) {
   const onAdd = async () => {
     await axiosClient.request({
       method: "POST",
       url: "/conversation/update_status",
       data: {
         message_id: message._id,
-        is_useful: !message.useful,
+        is_useful: !message.is_useful,
       },
     });
+    getListMessage();
+    getListUsefulMessage();
   };
 
   return (
@@ -45,7 +48,7 @@ export function AIMessage({ message }) {
             className="rounded-full bg-[#18181B]"
             onClick={onAdd}
           >
-            <MdAddToPhotos />
+            {!message.is_useful ? <MdAddToPhotos /> : <AiFillDelete />}
           </Button>
         </div>
       </div>

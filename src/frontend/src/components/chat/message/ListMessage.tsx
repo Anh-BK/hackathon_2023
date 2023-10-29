@@ -2,12 +2,17 @@ import { Avatar, Card, CardBody, Textarea } from "@nextui-org/react";
 
 import { AIMessage } from "./AIMessage";
 import { ASSISTANT } from "../../../constants/role";
-import { LoadingMessage } from "../../skeleton";
+import { LoadingMessage } from "../../Skeleton";
 import React from "react";
 import { UserMessage } from "./UserMessage";
 import { useChatScroll } from "../../../hook/useChatScroll";
 
-export function ListMessage({ listMessage, usefulTable }) {
+export function ListMessage({
+  listMessage,
+  usefulTable,
+  getListMessage,
+  getListUsefulMessage,
+}) {
   const ref = useChatScroll(listMessage);
 
   return (
@@ -15,7 +20,7 @@ export function ListMessage({ listMessage, usefulTable }) {
       {listMessage.map((message, index) => (
         <div
           key={index}
-          className={`w-1/2 ${
+          className={`max-w-1/2 ${
             message.role === ASSISTANT ? "self-start pr-4" : "self-end pl-4"
           }`}
         >
@@ -32,14 +37,18 @@ export function ListMessage({ listMessage, usefulTable }) {
                 radius="full"
                 src="https://www.the-digital-insurer.com/wp-content/uploads/2016/06/718RobotFinance.jpg"
               />
-              <Card className="mx-4 w-[400px]">
+              <Card className="mx-4">
                 <CardBody className="py-4">
                   <LoadingMessage />
                 </CardBody>
               </Card>
             </div>
           ) : (
-            <AIMessage message={message} />
+            <AIMessage
+              message={message}
+              getListMessage={getListMessage}
+              getListUsefulMessage={getListUsefulMessage}
+            />
           )}
         </div>
       ))}

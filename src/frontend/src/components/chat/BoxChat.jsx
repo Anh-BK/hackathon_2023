@@ -13,6 +13,8 @@ export function BoxChat({ listMessage, setListMessage, company, preAction }) {
       return;
     }
 
+    setMessage("");
+
     setListMessage((prevState) => [
       ...prevState,
       {
@@ -41,6 +43,7 @@ export function BoxChat({ listMessage, setListMessage, company, preAction }) {
         const newState = [
           ...prevState,
           {
+            _id: answer.message_id,
             message: answer.answer,
             citations: answer.citation,
             role: ASSISTANT,
@@ -50,14 +53,19 @@ export function BoxChat({ listMessage, setListMessage, company, preAction }) {
       }
       const newState = [...prevState];
       newState[newState.length - 1] = {
+        _id: answer.message_id,
         message: answer.answer,
         citations: answer.citation,
         role: ASSISTANT,
       };
       return newState;
     });
+  };
 
-    setMessage("");
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
   };
 
   return (
@@ -70,6 +78,7 @@ export function BoxChat({ listMessage, setListMessage, company, preAction }) {
         labelPlacement="outside"
         placeholder="Enter your description"
         className="col-span-12 md:col-span-6 mb-6 md:mb-0"
+        onKeyPress={handleKeyPress}
       />
       <Button isIconOnly onClick={sendMessage}>
         <IoMdSend />

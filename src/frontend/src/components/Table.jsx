@@ -12,6 +12,7 @@ import {
   DropdownTrigger,
   Input,
   Pagination,
+  Spinner,
   Table,
   TableBody,
   TableCell,
@@ -19,11 +20,16 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/react";
-import { INITIAL_VISIBLE_COLUMNS, columns, users } from "../constants/table";
+import React, { useState } from "react";
 
-import React from "react";
+import { INITIAL_VISIBLE_COLUMNS } from "../constants/table";
+import axiosClient from "../config/axios";
 
-export function TableAnswer({ usefulTable }) {
+export function TableAnswer({
+  usefulTable,
+  columns,
+  getListUsefulMessage = null,
+}) {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState(
@@ -31,6 +37,7 @@ export function TableAnswer({ usefulTable }) {
   );
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [page, setPage] = React.useState(1);
+  const [loadingState, setLoadingState] = useState("idle");
 
   const pages = Math.ceil(usefulTable.length / rowsPerPage);
 
@@ -44,6 +51,7 @@ export function TableAnswer({ usefulTable }) {
   }, [page, rowsPerPage]);
 
   const removeUseful = async (id) => {
+    setLoadingState("loading");
     await axiosClient.request({
       method: "POST",
       url: "/conversation/update_status",
@@ -52,6 +60,8 @@ export function TableAnswer({ usefulTable }) {
         is_useful: false,
       },
     });
+    getListUsefulMessage();
+    setLoadingState("idle");
   };
 
   const renderCell = React.useCallback((data, columnKey) => {
@@ -190,7 +200,12 @@ export function TableAnswer({ usefulTable }) {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No data found"} items={items}>
+      <TableBody
+        emptyContent={"No data found"}
+        items={items}
+        loadingContent={<Spinner />}
+        loadingState={loadingState}
+      >
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (
