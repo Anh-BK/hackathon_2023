@@ -1,10 +1,14 @@
 export const INITIAL_VISIBLE_COLUMNS = ["question", "answer", "actions"];
 
 export const columns = [
-  { name: "QUESTION", uid: "question" },
   { name: "ANSWER", uid: "answer" },
   { name: "CITATIONS", uid: "citations" },
   { name: "ACTIONS", uid: "actions" },
+];
+
+export const columnsPreview = [
+  { name: "ANSWER", uid: "answer" },
+  { name: "CITATIONS", uid: "citations" },
 ];
 
 export const users = [

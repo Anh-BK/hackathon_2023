@@ -7,7 +7,7 @@ import remarkGfm from "remark-gfm";
 export function UserMessage({ message }) {
   return (
     <Card>
-      <CardBody className="py-4 flex flex-row justify-between">
+      <CardBody className="py-4 justify-end">
         <Markdown className="text-[14px] p-0" remarkPlugins={[remarkGfm]}>
           {message.message}
         </Markdown>
