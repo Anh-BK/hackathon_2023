@@ -16,7 +16,7 @@ class OnlineSearch(QueryExtractorLangchain):
         self.max_tokens = 8192
         self.max_gen_tokens = 512
         self.detailed_search = True
-        self.num_queries = 5
+        self.num_queries = 3
 
     def run(self, history: List[Message] = [], **kwargs):
         kwargs["context"] = kwargs.get("context", "")
@@ -51,14 +51,14 @@ class OnlineSearch(QueryExtractorLangchain):
         if self.detailed_search:
             tool = retrieval_tool
         for query in queries[:self.num_queries]:
-            searched_results = tool.run(query, num_results=3)
+            searched_results = tool.run(query, num_results=2)
             composer_kwargs["sources"] += searched_results
 
         pattern = r"Content: (.*?)\nSource: (.*?)\n\n"
         reference = ""
         format_source = ""
         for (idx, source) in enumerate(re.findall(pattern, composer_kwargs["sources"], re.DOTALL)):
-            if idx > 6:
+            if idx > 4:
                 break
             reference += f"[{idx + 1}]" + " Source: " + source[1] + "\n"
             format_source += "Content: " + source[0] + "\n" + f"[{idx + 1}]" + " Source: " + source[1] + "\n\n"

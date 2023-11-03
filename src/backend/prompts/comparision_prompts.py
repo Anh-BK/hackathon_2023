@@ -8,7 +8,7 @@ COMPARISION_SYSTEM_TEMPLATE = (
 COMPARISION_USER_TEMPLATE = (
 """
 Your task is to help users to compare bussiness and financial parts of two company by using given contexts below.
-The comparision result only focus on given contexts.
+The comparision result only focus on given contexts and then give user advise which company is better.
 
 Contexts: 
 - Context 1: {context_1}
